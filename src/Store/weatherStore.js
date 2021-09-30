@@ -21,7 +21,7 @@ const months = [
 
 class WeatherStore {
   showTempIn = 0;
-  weatherData = new Map();
+  weatherData = [];
   loading = false;
   isError = false;
 
@@ -84,10 +84,13 @@ class WeatherStore {
       dateMap.set(key, { avgTemp: newAvgTemp, data: list });
     });
 
-    dateMap.forEach((values, keys) => {
-      console.log(keys, values.avgTemp);
-    });
-    this.weatherData = dateMap;
+    // dateMap.forEach((values, keys) => {
+    //   console.log(keys, values.avgTemp);
+    // });
+    this.weatherData = Array.from(dateMap, ([name, value]) => ({
+      name,
+      value,
+    }));
   }
 }
 

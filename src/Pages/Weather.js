@@ -3,6 +3,9 @@ import StoreContext from '../Context/';
 import { observer } from 'mobx-react-lite';
 import Loading from '../Components/Loading';
 import Error from '../Components/Error';
+import WeatherCard from '../Components/WeatherCard';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+
 import { toJS } from 'mobx';
 
 function Weather() {
@@ -10,7 +13,14 @@ function Weather() {
 
   useEffect(() => {}, []);
 
-  console.log(toJS(weatherStore.weatherData));
+  const { pageIndex, setPageIndex } = React.useState(0);
+  const pageSize = 3;
+
+  const options = {
+    rewind: true,
+    width: 800,
+    gap: '1rem',
+  };
 
   return (
     <div>
@@ -23,6 +33,16 @@ function Weather() {
       >
         Refresh{' '}
       </button>
+      <Splide options={options}>
+        {weatherStore.weatherData.length > 0 &&
+          weatherStore.weatherData.map((data) => {
+            return (
+              <SplideSlide>
+                <WeatherCard />
+              </SplideSlide>
+            );
+          })}
+      </Splide>
     </div>
   );
 }
