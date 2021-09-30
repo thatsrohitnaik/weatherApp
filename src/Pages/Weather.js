@@ -33,12 +33,18 @@ function Weather() {
       >
         Refresh{' '}
       </button>
-      <Splide options={options}>
+      <Splide
+        options={{
+          rewind: true,
+          width: 800,
+          gap: '1rem',
+        }}
+      >
         {weatherStore.weatherData.length > 0 &&
           weatherStore.weatherData.map((data) => {
             return (
               <SplideSlide>
-                <WeatherCard />
+                <div />
               </SplideSlide>
             );
           })}
