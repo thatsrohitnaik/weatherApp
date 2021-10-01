@@ -5,6 +5,7 @@ import Loading from '../Components/Loading';
 import Error from '../Components/Error';
 import WeatherCard from '../Components/WeatherCard';
 import Slider from 'react-slick';
+import {convertKelvinToFahrenheit as kTof, convertKelvinToCelsius as kToC}  from '../Util/tempConverter'
 
 import { toJS } from 'mobx';
 
@@ -56,18 +57,22 @@ const setting = {
 function Weather() {
   const { weatherStore } = React.useContext(StoreContext);
 
+
   useEffect(() => {}, []);
 
   return (
     <div>
+      <div></div>
       <Slider {...slideSettings}>
         {weatherStore.weatherData.length > 0 &&
           weatherStore.weatherData.map((data, index) => {
             const {date,value} = toJS(data);
-            console.log(date, value.avgTemp);
+            console.log(data)
+            const temp = weatherStore.showTempIn === 'F' ? kTof(value.avgTemp) : kToC(value.avgTemp);
+
             return (
               <div key={index}>
-                <WeatherCard avgTemp={value.avgTemp} date={date} cloud={}/>
+                <WeatherCard avgTemp={temp} date={date} cloud={}/>
               </div>
             );
           })}

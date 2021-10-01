@@ -13,15 +13,14 @@ export default function WeatherCard(props) {
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Temperature
-        </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          adjective
+          {avgTemp}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
+      <CardContent>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          {date}
+        </Typography>
+      </CardContent>
     </Card>
   );
 }
