@@ -2,3 +2,8 @@ h1,
 p {
   font-family: Lato;
 }
+
+.slick-prev:before,
+.slick-next:before {
+  color: blue !important;
+}
