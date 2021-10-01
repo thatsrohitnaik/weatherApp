@@ -10,7 +10,7 @@ export default function WeatherCard(props) {
   const { avgTemp, date, cloud } = props;
 
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ margin: 1 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {avgTemp}
