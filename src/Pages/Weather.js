@@ -46,9 +46,7 @@ function Weather() {
         {weatherStore.weatherData.length > 0 &&
           weatherStore.weatherData.map((data, index) => {
             const {date,value} = toJS(data);
-            console.log(weatherStore.showTempIn,'hmm')
             const temp = weatherStore.showTempIn === 'F' ? kTof(value.avgTemp) : kToC(value.avgTemp);
-
             return (
               <div key={index}>
                 <WeatherCard avgTemp={temp} date={date} cloud={}/>
