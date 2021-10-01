@@ -29,7 +29,9 @@ class WeatherStore {
     makeAutoObservable(this);
   }
 
-  toggelShowTempIn() {}
+  setShowTempIn(setTo) {
+    this.showTempIn = setTo;
+  }
 
   fetchWeatherReport() {
     this.loading = true;

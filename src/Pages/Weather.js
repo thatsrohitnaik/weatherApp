@@ -6,67 +6,47 @@ import Error from '../Components/Error';
 import WeatherCard from '../Components/WeatherCard';
 import Slider from 'react-slick';
 import {convertKelvinToFahrenheit as kTof, convertKelvinToCelsius as kToC}  from '../Util/tempConverter'
-
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 import { toJS } from 'mobx';
-
-const slideSettings = {
-  arrows: true,
-  accessibility: true,
-  infinite: false,
-  speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 3,
-  initialSlide: 0,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-      },
-    },
-    {
-      breakpoint: 900,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        initialSlide: 0,
-        infinite: true,
-      },
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-  ],
-};
-
-const setting = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-};
+import {slideSettings} from '../settings'
 
 function Weather() {
   const { weatherStore } = React.useContext(StoreContext);
+  const [value, setValue] = React.useState(weatherStore.showTempIn|| 'F');
 
+  const handleChange = (event) => {
+    setValue(event.target.value);
+    weatherStore.setShowTempIn(event.target.value)
+  };
 
   useEffect(() => {}, []);
 
   return (
     <div>
-      <div></div>
+      <div>
+      <FormControl component="fieldset">
+      <FormLabel component="legend">Gender</FormLabel>
+      <RadioGroup
+        aria-label="gender"
+        name="controlled-radio-buttons-group"
+        value={value}
+        onChange={handleChange}
+      >
+        <FormControlLabel value="F" control={<Radio />} label="Ferheanite" />
+        <FormControlLabel value="C" control={<Radio />} label="Ceilcius" />
+      </RadioGroup>
+    </FormControl>
+    {value}
+      </div>
       <Slider {...slideSettings}>
         {weatherStore.weatherData.length > 0 &&
           weatherStore.weatherData.map((data, index) => {
             const {date,value} = toJS(data);
+            console.log(weatherStore.showTempIn,'hmm')
             const temp = weatherStore.showTempIn === 'F' ? kTof(value.avgTemp) : kToC(value.avgTemp);
 
             return (
