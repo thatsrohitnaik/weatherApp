@@ -9,11 +9,12 @@ import Slider from 'react-slick';
 import { toJS } from 'mobx';
 
 const slideSettings = {
-  dots: true,
+  arrows: true,
+  accessibility: true,
   infinite: false,
   speed: 500,
-  slidesToShow: 4,
-  slidesToScroll: 4,
+  slidesToShow: 3,
+  slidesToScroll: 3,
   initialSlide: 0,
   responsive: [
     {
@@ -21,26 +22,35 @@ const slideSettings = {
       settings: {
         slidesToShow: 3,
         slidesToScroll: 3,
-        infinite: true,
-        dots: true,
       },
     },
     {
-      breakpoint: 600,
+      breakpoint: 900,
       settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-        initialSlide: 2,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        initialSlide: 0,
+        infinite: true,
       },
     },
     {
       breakpoint: 480,
       settings: {
+        infinite: true,
+        speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
       },
     },
   ],
+};
+
+const setting = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
 };
 
 function Weather() {
@@ -51,33 +61,19 @@ function Weather() {
   return (
     <div>
       <Slider {...slideSettings}>
-        <div>
-          <h3>1</h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-        <div>
-          <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
-        </div>
-        <div>
-          <h3>7</h3>
-        </div>
-        <div>
-          <h3>8</h3>
-        </div>
+        {weatherStore.weatherData.length > 0 &&
+          weatherStore.weatherData.map((data, index) => {
+            const {date,value} = toJS(data);
+            console.log(date, value.avgTemp);
+            return (
+              <div key={index}>
+                <WeatherCard avgTemp={value.avgTemp} date={date} cloud={}/>
+              </div>
+            );
+          })}
       </Slider>
 
-      {/* {weatherStore.loading && <Loading loading={weatherStore.loading} />}
+      {weatherStore.loading && <Loading loading={weatherStore.loading} />}
       {weatherStore.isError && <Error isError={weatherStore.isError} />}
       <button
         onClick={() => {
@@ -86,22 +82,6 @@ function Weather() {
       >
         Refresh{' '}
       </button>
-      <Splide
-        options={{
-          rewind: true,
-          width: 800,
-          gap: '1rem',
-        }}
-      >
-        {weatherStore.weatherData.length > 0 &&
-          weatherStore.weatherData.map((data) => {
-            return (
-              <SplideSlide>
-                <div />
-              </SplideSlide>
-            );
-          })}
-      </Splide> */}
     </div>
   );
 }
