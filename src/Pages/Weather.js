@@ -67,7 +67,6 @@ function Weather() {
         {weatherStore.weatherData.length > 0 &&
           weatherStore.weatherData.map((data, index) => {
             const {date,value} = toJS(data);
-            console.log(data)
             const temp = weatherStore.showTempIn === 'F' ? kTof(value.avgTemp) : kToC(value.avgTemp);
 
             return (
