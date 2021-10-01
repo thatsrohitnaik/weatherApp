@@ -29,8 +29,9 @@ function Weather() {
     <div>
       <div>
       <FormControl component="fieldset">
-      <FormLabel component="legend">Gender</FormLabel>
+      <FormLabel component="legend">Temperature</FormLabel>
       <RadioGroup
+      row
         aria-label="gender"
         name="controlled-radio-buttons-group"
         value={value}
@@ -40,7 +41,6 @@ function Weather() {
         <FormControlLabel value="C" control={<Radio />} label="Ceilcius" />
       </RadioGroup>
     </FormControl>
-    {value}
       </div>
       <Slider {...slideSettings}>
         {weatherStore.weatherData.length > 0 &&
