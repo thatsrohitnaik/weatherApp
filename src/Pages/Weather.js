@@ -16,24 +16,24 @@ import {slideSettings} from '../settings'
 import {TemperatureUnits as Units} from '../Util/temperature'
 
 function Weather() {
-  const { weatherStore } = React.useContext(StoreContext);
-  const [unit, setUnit] = React.useState(weatherStore.unit || Units.Fahrenheit);
+  const { weatherStore: store } = React.useContext(StoreContext);
+  const [unit, setUnit] = React.useState(store.unit || Units.Fahrenheit);
 
   const handleChange = (event) => {
     setUnit(event.target.value);
-    weatherStore.setUnit(event.target.value)
+    store.setUnit(event.target.value)
   };
 
   useEffect(() => {
-    weatherStore.fetchWeatherReport();
+    store.fetchWeatherReport();
   }, []);
 
-  if(weatherStore.loading){
+  if(store.loading){
      return <Loading/>
   }
 
-  if(weatherStore.isError){
-     return  <Error message={weatherStore.errorMessage} />
+  if(store.isError){
+     return  <Error message={store.errorMessage} />
   }
 
   return (
@@ -55,18 +55,14 @@ function Weather() {
     </FormControl>
       </div>
       <Slider {...slideSettings}>
-        {weatherStore.report.length > 0 &&
-          weatherStore.report.map((data, index) => {
-            const {date,value} = toJS(data);
-            return (
-                <WeatherCard key={index} avgTemp={kelvinConverter(value.avgTemp, weatherStore.unit)} date={date} cloud={}/>
-            );
-          })}
+        {store.report.length > 0 &&
+          toJS(store.report).map(({date,value}, index) => <WeatherCard key={index} avgTemp={kelvinConverter(value.avgTemp, store.unit)} date={date} cloud={}/>
+          )}
       </Slider>
 
       <button
         onClick={() => {
-          weatherStore.fetchWeatherReport();
+          store.fetchWeatherReport();
         }}
       >
         Refresh{' '}
