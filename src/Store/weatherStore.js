@@ -35,28 +35,29 @@ class WeatherStore {
       });
   }
 
-  reStructureResponse(json) {
-    let dateMap = new Map();
+  reStructureResponse(response) {
+    let map = new Map();
 
-    json.list.map((data) => {
-      const { dt, main } = data;
+    response.list.map((report) => {
+      const { dt, main } = report;
+      const { temp_max, temp_min } = main;
       const key = epocToDate(dt);
-      let newAvgTemp = (main.temp_max + main.temp_min) / 2;
+      let currentAvgTemp = (temp_max + temp_min) / 2;
 
       let list = [];
 
-      if (dateMap.has(key)) {
-        let data = dateMap.get(key);
-        list = data.data;
-        newAvgTemp = (newAvgTemp + data.avgTemp) / 2;
+      if (map.has(key)) {
+        let value = map.get(key);
+        list = value.data;
+        currentAvgTemp = (currentAvgTemp + value.avgTemp) / 2;
       }
 
-      list.push(data);
+      list.push(report);
 
-      dateMap.set(key, { avgTemp: newAvgTemp, data: list });
+      map.set(key, { avgTemp: currentAvgTemp, data: list });
     });
 
-    this.report = Array.from(dateMap, ([date, value]) => ({
+    this.report = Array.from(map, ([date, value]) => ({
       date,
       value,
     }));
