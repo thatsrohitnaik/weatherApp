@@ -2,14 +2,10 @@ import { makeAutoObservable } from 'mobx';
 import axios from 'axios';
 import { apiURL2 } from '../settings';
 import { epocToDate } from '../Util/date';
-
-const units = {
-  Fahrenheit: 'F',
-  Celsius: 'C',
-};
+import { TemperatureUnits as Units } from '../Util/temperature';
 
 class WeatherStore {
-  unit = units.Fahrenheit;
+  unit = Units.Fahrenheit;
   report = [];
   loading = false;
   isError = false;

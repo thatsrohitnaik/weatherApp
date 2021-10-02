@@ -11,3 +11,8 @@ export function convertKelvinToCelsius(kelvin) {
   }
   return Math.ceil(kelvin - 273.15) + 'C';
 }
+
+export const TemperatureUnits = {
+  Fahrenheit: 'F',
+  Celsius: 'C',
+};
