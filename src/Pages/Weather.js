@@ -5,7 +5,7 @@ import Loading from '../Components/Loading';
 import Error from '../Components/Error';
 import WeatherCard from '../Components/WeatherCard';
 import Slider from 'react-slick';
-import {kelvinConverter,convertKelvinToFahrenheit as kTof, convertKelvinToCelsius as kToC}  from '../Util/temperature'
+import {kelvinConverter}  from '../Util/temperature'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -48,8 +48,9 @@ function Weather() {
         value={unit}
         onChange={handleChange}
       >
-        <FormControlLabel value={Units.Fahrenheit} control={<Radio />} label="Ferheanite" />
-        <FormControlLabel value={Units.Celsius} control={<Radio />} label="Ceilcius" />
+        {
+         Object.entries(Units).map(([key,value])=> <FormControlLabel value={value} control={<Radio />} label={key} />)
+        }
       </RadioGroup>
     </FormControl>
       </div>
@@ -57,12 +58,8 @@ function Weather() {
         {weatherStore.report.length > 0 &&
           weatherStore.report.map((data, index) => {
             const {date,value} = toJS(data);
-            const temp = kelvinConverter(value.avgTemp, weatherStore.unit);
-
             return (
-              <div key={index}>
-                <WeatherCard avgTemp={temp} date={date} cloud={}/>
-              </div>
+                <WeatherCard key={index} avgTemp={kelvinConverter(value.avgTemp, weatherStore.unit)} date={date} cloud={}/>
             );
           })}
       </Slider>
