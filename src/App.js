@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react';
-import { observer } from 'mobx-react-lite';
-import StoreContext from './Context/';
+import React from 'react';
 import Weather from './Pages/Weather';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';

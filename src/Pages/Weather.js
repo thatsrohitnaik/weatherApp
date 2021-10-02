@@ -16,11 +16,11 @@ import {slideSettings} from '../settings'
 
 function Weather() {
   const { weatherStore } = React.useContext(StoreContext);
-  const [value, setValue] = React.useState(weatherStore.showTempIn|| 'F');
+  const [unit, setUnit] = React.useState(weatherStore.unit|| 'F');
 
   const handleChange = (event) => {
-    setValue(event.target.value);
-    weatherStore.setShowTempIn(event.target.value)
+    setUnit(event.target.value);
+    weatherStore.setUnit(event.target.value)
   };
 
   useEffect(() => {
@@ -40,7 +40,7 @@ function Weather() {
       row
         aria-label="gender"
         name="controlled-radio-buttons-group"
-        value={value}
+        value={unit}
         onChange={handleChange}
       >
         <FormControlLabel value="F" control={<Radio />} label="Ferheanite" />
@@ -49,10 +49,10 @@ function Weather() {
     </FormControl>
       </div>
       <Slider {...slideSettings}>
-        {weatherStore.weatherData.length > 0 &&
-          weatherStore.weatherData.map((data, index) => {
+        {weatherStore.report.length > 0 &&
+          weatherStore.report.map((data, index) => {
             const {date,value} = toJS(data);
-            const temp = weatherStore.showTempIn === 'F' ? kTof(value.avgTemp) : kToC(value.avgTemp);
+            const temp = weatherStore.unit === 'F' ? kTof(value.avgTemp) : kToC(value.avgTemp);
             return (
               <div key={index}>
                 <WeatherCard avgTemp={temp} date={date} cloud={}/>

@@ -12,6 +12,3 @@ ReactDOM.render(
   </StoreContext.Provider>,
   document.body
 );
-
-// import "~slick-carousel/slick/slick.css";
-// import "~slick-carousel/slick/slick-theme.css";

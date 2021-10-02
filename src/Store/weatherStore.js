@@ -1,78 +1,48 @@
 import { makeAutoObservable } from 'mobx';
 import axios from 'axios';
-
-const apiURL =
-  'http://api.openweathermap.org/data/2.5/forecast?q=Munich,de&APPID=75f972b80e26f14fe6c920aa6a85ad57&cnt=40';
-const apiURL2 = '/data.json';
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
+import { apiURL2 } from '../settings';
+import { epocToDate } from '../Util/date';
 
 class WeatherStore {
-  showTempIn = 'F';
-  weatherData = [];
+  unit = 'F';
+  report = [];
   loading = false;
   isError = false;
+  errorMessage = '';
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setShowTempIn(setTo) {
-    this.showTempIn = setTo;
+  setUnit(unit) {
+    this.unit = unit;
   }
 
   fetchWeatherReport() {
     this.loading = true;
-    axios.get(apiURL2).then((res) => {
-      this.reArrangeDataToSuitOurNeed(res.data);
-      this.loading = false;
-    });
+    this.isError = false;
+    this.errorMessage = '';
+    axios
+      .get(apiURL2)
+      .then((res) => {
+        this.reStructureResponse(res.data);
+        this.loading = false;
+      })
+      .catch(() => {
+        this.isError = true;
+        this.errorMessage =
+          'There was a error while fetching data. Please click refresh to try again';
+      });
   }
 
-  reArrangeDataToSuitOurNeed(json) {
-    // At the UI front we need data as per date base
-    // Since we get data from API in intervals of 3 hours
-    // We need tp process this data as raw data and
-    // convert it into Date wise data
-    // To do so the i am using Map object
-
-    // Note that we get epoc time in each entry
-    // I am using this epoc time and converting it into
-    // Date format i.e Year Month Date
-    // This combination forms the Key of the Map object
-    // value of this is the 8 entries that we have for a day
-    // While doing the above process we are also calculating
-    // Average temperature for that day
-    // the value of the key is Average day Temprature and Temperature for 3 hours
-
+  reStructureResponse(json) {
     let dateMap = new Map();
 
     json.list.map((data) => {
       const { dt, main } = data;
-
-      const date = new Date(0);
-      date.setUTCSeconds(dt);
-
-      const key =
-        date.getFullYear() +
-        ' ' +
-        months[date.getMonth()] +
-        ' ' +
-        date.getDate();
-
+      const key = epocToDate(dt);
       let newAvgTemp = (main.temp_max + main.temp_min) / 2;
+
       let list = [];
 
       if (dateMap.has(key)) {
@@ -86,10 +56,7 @@ class WeatherStore {
       dateMap.set(key, { avgTemp: newAvgTemp, data: list });
     });
 
-    // dateMap.forEach((values, keys) => {
-    //   console.log(keys, values.avgTemp);
-    // });
-    this.weatherData = Array.from(dateMap, ([date, value]) => ({
+    this.report = Array.from(dateMap, ([date, value]) => ({
       date,
       value,
     }));
