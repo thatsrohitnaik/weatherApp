@@ -5,7 +5,7 @@ import Loading from '../Components/Loading';
 import Error from '../Components/Error';
 import WeatherCard from '../Components/WeatherCard';
 import Slider from 'react-slick';
-import {convertKelvinToFahrenheit as kTof, convertKelvinToCelsius as kToC}  from '../Util/tempConverter'
+import {convertKelvinToFahrenheit as kTof, convertKelvinToCelsius as kToC}  from '../Util/temperature'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';

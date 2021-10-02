@@ -3,8 +3,13 @@ import axios from 'axios';
 import { apiURL2 } from '../settings';
 import { epocToDate } from '../Util/date';
 
+const units = {
+  Fahrenheit: 'F',
+  Celsius: 'C',
+};
+
 class WeatherStore {
-  unit = 'F';
+  unit = units.Fahrenheit;
   report = [];
   loading = false;
   isError = false;
