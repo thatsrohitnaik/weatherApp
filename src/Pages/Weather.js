@@ -23,7 +23,13 @@ function Weather() {
     weatherStore.setShowTempIn(event.target.value)
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    weatherStore.fetchWeatherReport();
+  }, []);
+
+  if(weatherStore.loading){
+     return <Loading/>
+  }
 
   return (
     <div>
