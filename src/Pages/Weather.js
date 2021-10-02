@@ -44,8 +44,8 @@ function Weather() {
         value={unit}
         onChange={handleChange}
       >
-        <FormControlLabel value="F" control={<Radio />} label="Ferheanite" />
-        <FormControlLabel value="C" control={<Radio />} label="Ceilcius" />
+        <FormControlLabel value={Units.Fahrenheit} control={<Radio />} label="Ferheanite" />
+        <FormControlLabel value={Units.Celsius} control={<Radio />} label="Ceilcius" />
       </RadioGroup>
     </FormControl>
       </div>
@@ -54,7 +54,7 @@ function Weather() {
           weatherStore.report.map((data, index) => {
             const {date,value} = toJS(data);
             const temp = kelvinConverter(value.avgTemp, weatherStore.unit);
-            
+
             return (
               <div key={index}>
                 <WeatherCard avgTemp={temp} date={date} cloud={}/>
