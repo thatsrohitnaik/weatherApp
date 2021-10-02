@@ -32,6 +32,10 @@ function Weather() {
      return <Loading/>
   }
 
+  if(weatherStore.isError){
+     return  <Error message={weatherStore.errorMessage} />
+  }
+
   return (
     <div>
       <div>
@@ -63,8 +67,6 @@ function Weather() {
           })}
       </Slider>
 
-      {weatherStore.loading && <Loading loading={weatherStore.loading} />}
-      {weatherStore.isError && <Error isError={weatherStore.isError} />}
       <button
         onClick={() => {
           weatherStore.fetchWeatherReport();
