@@ -1,11 +1,11 @@
-import React, { useEffect, Component } from 'react';
+import React, { useEffect } from 'react';
 import StoreContext from '../Context/';
 import { observer } from 'mobx-react-lite';
 import Loading from '../Components/Loading';
 import Error from '../Components/Error';
 import WeatherCard from '../Components/WeatherCard';
 import Slider from 'react-slick';
-import {convertKelvinToFahrenheit as kTof, convertKelvinToCelsius as kToC}  from '../Util/temperature'
+import {kelvinConverter,convertKelvinToFahrenheit as kTof, convertKelvinToCelsius as kToC}  from '../Util/temperature'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -13,10 +13,11 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { toJS } from 'mobx';
 import {slideSettings} from '../settings'
+import {TemperatureUnits as Units} from '../Util/temperature'
 
 function Weather() {
   const { weatherStore } = React.useContext(StoreContext);
-  const [unit, setUnit] = React.useState(weatherStore.unit|| 'F');
+  const [unit, setUnit] = React.useState(weatherStore.unit || Units.Fahrenheit);
 
   const handleChange = (event) => {
     setUnit(event.target.value);
@@ -52,7 +53,8 @@ function Weather() {
         {weatherStore.report.length > 0 &&
           weatherStore.report.map((data, index) => {
             const {date,value} = toJS(data);
-            const temp = weatherStore.unit === 'F' ? kTof(value.avgTemp) : kToC(value.avgTemp);
+            const temp = kelvinConverter(value.avgTemp, weatherStore.unit);
+            
             return (
               <div key={index}>
                 <WeatherCard avgTemp={temp} date={date} cloud={}/>
