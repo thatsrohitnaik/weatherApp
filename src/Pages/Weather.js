@@ -72,7 +72,6 @@ function Weather() {
   }
 
   const showGraph = (value, index) => {
-    console.log(index);
     store.setSelectedDayTemp(value.data, index);
   };
 
@@ -118,7 +117,6 @@ function Weather() {
               key={index}
               avgTemp={kelvinConverter(value.avgTemp, store.unit)}
               date={date}
-              weather={value.data[0].weather[0]}
               unit={unit}
               value={value}
               city={store.city}
