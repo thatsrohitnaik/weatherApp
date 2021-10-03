@@ -21,6 +21,10 @@ class WeatherStore {
     this.unit = unit;
   }
 
+  setSelectedDayTemp(value) {
+    this.selectedDayTemp = value;
+  }
+
   fetchWeatherReport() {
     this.loading = true;
     this.isError = false;
