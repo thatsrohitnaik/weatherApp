@@ -11,6 +11,13 @@ const options = {
       },
     ],
   },
+  onClick: (e, element) => {
+    console.log(element);
+    if (element.length > 0) {
+      var ind = element[0].index;
+      alert(ind);
+    }
+  },
 };
 
 const WeatherGraph = ({ data }) => {

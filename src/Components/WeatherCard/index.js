@@ -10,11 +10,20 @@ import { makeStyles } from '@mui/styles';
 import { getIcon } from '../../Util/icon';
 
 const useStyles = makeStyles({
-  card: {
+  cardSelect: {
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
     border: 0,
     borderRadius: '5px',
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    color: 'white',
+    height: '100%',
+    padding: '0 10px',
+  },
+  card: {
+    background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+    border: 0,
+    borderRadius: '5px',
+    boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
     color: 'white',
     height: '100%',
     padding: '0 10px',
@@ -39,14 +48,25 @@ const Item = styled(Box)(({ theme }) => ({
 }));
 
 export default function WeatherCard(props) {
-  const { avgTemp, date, cloud, weather, showGraph, value, unit, city } = props;
+  const {
+    avgTemp,
+    date,
+    cloud,
+    weather,
+    showGraph,
+    value,
+    unit,
+    city,
+    index,
+    currentIndex,
+  } = props;
   const classes = useStyles();
   return (
     <Card
       sx={{ margin: 1 }}
-      className={classes.card}
+      className={currentIndex === index ? classes.cardSelect : classes.card}
       onClick={() => {
-        showGraph(value);
+        showGraph(value, index);
       }}
     >
       <CardContent>
@@ -85,11 +105,6 @@ export default function WeatherCard(props) {
           </Item>
         </Stack>
       </CardContent>
-      {/* <CardContent>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {date}
-        </Typography>
-      </CardContent> */}
     </Card>
   );
 }

@@ -6,6 +6,8 @@ export const slideSettings = {
   slidesToShow: 3,
   slidesToScroll: 3,
   initialSlide: 0,
+  focusOnSelect: true,
+  useTransform: true,
   responsive: [
     {
       breakpoint: 1024,

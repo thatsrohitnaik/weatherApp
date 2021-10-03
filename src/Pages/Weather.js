@@ -67,8 +67,9 @@ function Weather() {
     return <Error message={store.errorMessage} />;
   }
 
-  const showGraph = (value) => {
-    store.setSelectedDayTemp(value.data);
+  const showGraph = (value, index) => {
+    console.log(index);
+    store.setSelectedDayTemp(value.data, index);
   };
 
   return (
@@ -117,11 +118,22 @@ function Weather() {
               unit={unit}
               value={value}
               city={store.city}
+              index={index}
+              currentIndex={store.currentIndex}
               showGraph={showGraph}
             />
           ))}
       </Slider>
-      <WeatherGraph data={store.graphDataset} />
+      <Grid
+        container
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+      >
+        <Grid item xs={12} sm={12} md={8}>
+          <WeatherGraph data={store.graphDataset} />
+        </Grid>
+        <Grid item xs={12} sm={12} md={4}></Grid>
+      </Grid>
     </div>
   );
 }
