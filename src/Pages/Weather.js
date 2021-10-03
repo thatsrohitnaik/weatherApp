@@ -59,6 +59,10 @@ function Weather() {
     store.fetchWeatherReport();
   }, []);
 
+  const handleIndexClick = (index) => {
+    console.log('currentHourIndex', index, toJS(store.selectedDayTemp[index]));
+  };
+
   if (store.loading) {
     return <Loading />;
   }
@@ -130,7 +134,10 @@ function Weather() {
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
         <Grid item xs={12} sm={12} md={8}>
-          <WeatherGraph data={store.graphDataset} />
+          <WeatherGraph
+            data={store.graphDataset}
+            handleIndexClick={handleIndexClick}
+          />
         </Grid>
         <Grid item xs={12} sm={12} md={4}></Grid>
       </Grid>

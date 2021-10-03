@@ -17,6 +17,7 @@ class WeatherStore {
   graphDataset = [];
   city = {};
   currentSildeIndex = 0;
+  currentHourIndex = 0;
 
   constructor() {
     makeAutoObservable(this);
