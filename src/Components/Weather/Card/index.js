@@ -8,6 +8,7 @@ import { styled } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
 import { makeStyles } from '@mui/styles';
 import { getIcon } from '../../../Util/icon';
+import SwipeableTextMobileStepper from './Slider/';
 
 const useStyles = makeStyles({
   cardSelect: {
@@ -103,7 +104,8 @@ export default function WeatherCard(props) {
           </Item>
 
           <Item>
-            <img src={getIcon(weather.icon)} className={classes.img} />
+            {/* <img src={getIcon(weather.icon)} className={classes.img} /> */}
+            <SwipeableTextMobileStepper />
           </Item>
         </Stack>
       </CardContent>
