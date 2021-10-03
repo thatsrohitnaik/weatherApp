@@ -107,7 +107,7 @@ export default function WeatherCard(props) {
               className={classes.text}
               // sx={{ fontSize: 14 }}
               color="text.secondary"
-              gutterBottom
+              gutterTop
             >
               {date}
             </Typography>
