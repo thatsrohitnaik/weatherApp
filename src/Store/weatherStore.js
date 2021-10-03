@@ -2,7 +2,10 @@ import { makeAutoObservable } from 'mobx';
 import axios from 'axios';
 import { apiURL2 } from '../settings';
 import { epocToDate } from '../Util/date';
-import { TemperatureUnits as Units } from '../Util/temperature';
+import {
+  TemperatureUnits as Units,
+  kelvinConverter,
+} from '../Util/temperature';
 
 class WeatherStore {
   unit = Units.Fahrenheit;
@@ -11,7 +14,8 @@ class WeatherStore {
   isError = false;
   errorMessage = '';
   selectedDayTemp = [];
-  labels = [0, 3, 6, 9, 12, 15, 18, 21];
+  labels = [];
+  dataset = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -22,7 +26,16 @@ class WeatherStore {
   }
 
   setSelectedDayTemp(value) {
-    this.selectedDayTemp = value;
+    this.selectedDayTemp = value.data;
+    const label = [];
+    const max = [];
+    const min = [];
+    value.data.map((e) => {
+      label.push(e.hour);
+      max.push(kelvinConverter(e.main.temp_max, this.unit));
+      min.push(kelvinConverter(e.main.temp_min, this.unit));
+    });
+    console.log(max, min, label);
   }
 
   fetchWeatherReport() {

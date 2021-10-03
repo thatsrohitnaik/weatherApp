@@ -5,15 +5,15 @@ import Loading from '../Components/Loading';
 import Error from '../Components/Error';
 import WeatherCard from '../Components/WeatherCard';
 import Slider from 'react-slick';
-import { kelvinConverter } from '../Util/temperature'
+import { kelvinConverter } from '../Util/temperature';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { toJS } from 'mobx';
-import { slideSettings } from '../settings'
-import { TemperatureUnits as Units, getUnits } from '../Util/temperature'
+import { slideSettings } from '../settings';
+import { TemperatureUnits as Units, getUnits } from '../Util/temperature';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -40,16 +40,14 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   },
 }));
 
-
 const useStyles = makeStyles({
   icon: {
     position: 'relative',
     top: '50%',
     transform: 'translateY(-50%)',
     margin: 0,
-  }
+  },
 });
-
 
 function Weather() {
   const { weatherStore: store } = React.useContext(GlobalContext);
@@ -57,7 +55,7 @@ function Weather() {
 
   const handleChange = (event) => {
     setUnit(event.target.value);
-    store.setUnit(event.target.value)
+    store.setUnit(event.target.value);
   };
   const classes = useStyles();
 
@@ -66,16 +64,18 @@ function Weather() {
   }, []);
 
   if (store.loading) {
-    return <Loading />
+    return <Loading />;
   }
 
   if (store.isError) {
-    return <Error message={store.errorMessage} />
+    return <Error message={store.errorMessage} />;
   }
-  
-  const showGraph = (value)=>{
-console.log(value,'kks')
-  }
+
+  console.log(store.selectedDayTemp);
+
+  const showGraph = (value) => {
+    store.setSelectedDayTemp(value);
+  };
 
   return (
     <div>
@@ -96,28 +96,36 @@ console.log(value,'kks')
                   exclusive
                   onChange={handleChange}
                 >
-                  {
-                    Object.entries(Units).map(([key,value]) => <ToggleButton value={value} >{getUnits(value)}</ToggleButton>)
-                  }
+                  {Object.entries(Units).map(([key, value]) => (
+                    <ToggleButton value={value}>{getUnits(value)}</ToggleButton>
+                  ))}
                 </ToggleButtonGroup>
               </StyledToggleButtonGroup>
-              <RefreshIcon className={classes.icon} onClick={() => {
+              <RefreshIcon
+                className={classes.icon}
+                onClick={() => {
                   store.fetchWeatherReport();
-                }}/>
+                }}
+              />
             </Grid>
-            <Grid item xs={2}>
-               
-            </Grid>
+            <Grid item xs={2}></Grid>
           </Grid>
         </Box>
-
       </div>
       <Slider {...slideSettings}>
         {store.report.length > 0 &&
-          toJS(store.report).map(({ date, value }, index) => <WeatherCard key={index} avgTemp={kelvinConverter(value.avgTemp, store.unit)} date={date} cloud={} weather={value.data[0].weather[0]} value={value} showGraph={showGraph}/>
-          )}
+          toJS(store.report).map(({ date, value }, index) => (
+            <WeatherCard
+              key={index}
+              avgTemp={kelvinConverter(value.avgTemp, store.unit)}
+              date={date}
+              weather={value.data[0].weather[0]}
+              unit={unit}
+              value={value}
+              showGraph={showGraph}
+            />
+          ))}
       </Slider>
-
     </div>
   );
 }

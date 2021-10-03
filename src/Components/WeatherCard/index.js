@@ -39,7 +39,7 @@ const Item = styled(Box)(({ theme }) => ({
 }));
 
 export default function WeatherCard(props) {
-  const { avgTemp, date, cloud, weather, showGraph, value } = props;
+  const { avgTemp, date, cloud, weather, showGraph, value, unit } = props;
   const classes = useStyles();
 
   return (
@@ -65,7 +65,9 @@ export default function WeatherCard(props) {
               color="text.secondary"
               gutterBottom
             >
-              <p>{avgTemp}</p>
+              <p>
+                {avgTemp}°{unit}
+              </p>
             </Typography>
             <Typography
               variant="p"

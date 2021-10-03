@@ -7,14 +7,14 @@ export function convertKelvinToFahrenheit(kelvin) {
   if (undefined || null) {
     return null;
   }
-  return Math.ceil(((kelvin - 273.15) * 9) / 5 + 32) + ' °F';
+  return Math.ceil(((kelvin - 273.15) * 9) / 5 + 32);
 }
 
 export function convertKelvinToCelsius(kelvin) {
   if (undefined || null) {
     return null;
   }
-  return Math.ceil(kelvin - 273.15) + ' °C';
+  return Math.ceil(kelvin - 273.15);
 }
 
 export function kelvinConverter(kelvin, convertTo) {
