@@ -72,8 +72,6 @@ function Weather() {
     return <Error message={store.errorMessage} />;
   }
 
-  console.log(store.graphDataset);
-
   const showGraph = (value) => {
     store.setSelectedDayTemp(value.data);
   };

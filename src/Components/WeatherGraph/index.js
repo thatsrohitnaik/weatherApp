@@ -14,7 +14,6 @@ const options = {
 };
 
 const WeatherGraph = ({ data }) => {
-  console.log(data, 'hmm');
   return <Line data={data} options={options} />;
 };
 

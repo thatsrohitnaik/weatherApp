@@ -96,8 +96,7 @@ class WeatherStore {
       value,
     }));
 
-  //  console.log(this.report[0].value.data);
-     this.setSelectedDayTemp(this.report[0].value.data)
+    this.setSelectedDayTemp(this.report[0].value.data);
   }
 }
 
