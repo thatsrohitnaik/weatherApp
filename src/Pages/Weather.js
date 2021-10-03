@@ -3,7 +3,7 @@ import GlobalContext from '../Context/';
 import { observer } from 'mobx-react-lite';
 import Loading from '../Components/Loading';
 import Error from '../Components/Error';
-import WeatherCard from '../Components/WeatherCard';
+import WeatherCard from '../Components/Weather/Card';
 import Slider from 'react-slick';
 import { kelvinConverter } from '../Util/temperature';
 import { toJS } from 'mobx';
@@ -18,7 +18,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { makeStyles } from '@mui/styles';
-import WeatherGraph from '../Components/WeatherGraph/';
+import WeatherGraph from '../Components/Weather/Graph/';
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   '& .MuiToggleButtonGroup-grouped': {
