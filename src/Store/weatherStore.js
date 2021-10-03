@@ -10,8 +10,8 @@ class WeatherStore {
   loading = false;
   isError = false;
   errorMessage = '';
-  selectedDay = [];
-  labels;
+  selectedDayTemp = [];
+  labels = [0, 3, 6, 9, 12, 15, 18, 21];
 
   constructor() {
     makeAutoObservable(this);
@@ -50,7 +50,7 @@ class WeatherStore {
       const [h] = hour.split(':');
 
       report.hour = h;
-      
+
       let currentAvgTemp = (temp_max + temp_min) / 2;
 
       let list = [];
@@ -58,7 +58,6 @@ class WeatherStore {
       if (map.has(key)) {
         let value = map.get(key);
         list = value.data;
-        console.log(list);
         currentAvgTemp = (currentAvgTemp + value.avgTemp) / 2;
       }
 

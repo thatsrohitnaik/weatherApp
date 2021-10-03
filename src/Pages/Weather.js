@@ -72,6 +72,10 @@ function Weather() {
   if (store.isError) {
     return <Error message={store.errorMessage} />
   }
+  
+  const showGraph = (value)=>{
+console.log(value,'kks')
+  }
 
   return (
     <div>
@@ -110,12 +114,10 @@ function Weather() {
       </div>
       <Slider {...slideSettings}>
         {store.report.length > 0 &&
-          toJS(store.report).map(({ date, value }, index) => <WeatherCard key={index} avgTemp={kelvinConverter(value.avgTemp, store.unit)} date={date} cloud={} weather={value.data[0].weather[0]} onClick={()=>{
-            showGraph(value)
-          }}/>
+          toJS(store.report).map(({ date, value }, index) => <WeatherCard key={index} avgTemp={kelvinConverter(value.avgTemp, store.unit)} date={date} cloud={} weather={value.data[0].weather[0]} value={value} showGraph={showGraph}/>
           )}
       </Slider>
-      
+
     </div>
   );
 }

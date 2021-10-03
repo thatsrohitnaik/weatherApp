@@ -39,11 +39,17 @@ const Item = styled(Box)(({ theme }) => ({
 }));
 
 export default function WeatherCard(props) {
-  const { avgTemp, date, cloud, weather } = props;
+  const { avgTemp, date, cloud, weather, showGraph, value } = props;
   const classes = useStyles();
 
   return (
-    <Card sx={{ margin: 1 }} className={classes.card}>
+    <Card
+      sx={{ margin: 1 }}
+      className={classes.card}
+      onClick={() => {
+        showGraph(value);
+      }}
+    >
       <CardContent>
         <Stack
           direction="row"
