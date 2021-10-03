@@ -42,8 +42,6 @@ export default function WeatherCard(props) {
   const { avgTemp, date, cloud, weather } = props;
   const classes = useStyles();
 
-  console.log(getIcon(weather.icon));
-
   return (
     <Card sx={{ margin: 1 }} className={classes.card}>
       <CardContent>

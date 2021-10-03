@@ -110,9 +110,12 @@ function Weather() {
       </div>
       <Slider {...slideSettings}>
         {store.report.length > 0 &&
-          toJS(store.report).map(({ date, value }, index) => <WeatherCard key={index} avgTemp={kelvinConverter(value.avgTemp, store.unit)} date={date} cloud={} weather={value.data[0].weather[0]} />
+          toJS(store.report).map(({ date, value }, index) => <WeatherCard key={index} avgTemp={kelvinConverter(value.avgTemp, store.unit)} date={date} cloud={} weather={value.data[0].weather[0]} onClick={()=>{
+            showGraph(value)
+          }}/>
           )}
       </Slider>
+      
     </div>
   );
 }

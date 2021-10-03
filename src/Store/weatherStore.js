@@ -10,6 +10,8 @@ class WeatherStore {
   loading = false;
   isError = false;
   errorMessage = '';
+  selectedDay = [];
+  labels;
 
   constructor() {
     makeAutoObservable(this);
@@ -40,9 +42,15 @@ class WeatherStore {
     let map = new Map();
 
     response.list.map((report) => {
-      const { dt, main } = report;
+      const { dt, main, dt_txt } = report;
       const { temp_max, temp_min } = main;
-      const key = epocToDate(dt);
+      //const key = epocToDate(dt);
+
+      const [key, hour] = dt_txt.split(' ');
+      const [h] = hour.split(':');
+
+      report.hour = h;
+      
       let currentAvgTemp = (temp_max + temp_min) / 2;
 
       let list = [];
@@ -50,6 +58,7 @@ class WeatherStore {
       if (map.has(key)) {
         let value = map.get(key);
         list = value.data;
+        console.log(list);
         currentAvgTemp = (currentAvgTemp + value.avgTemp) / 2;
       }
 
