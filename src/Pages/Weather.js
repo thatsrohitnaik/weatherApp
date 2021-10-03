@@ -121,6 +121,7 @@ function Weather() {
               weather={value.data[0].weather[0]}
               unit={unit}
               value={value}
+              city={store.city}
               showGraph={showGraph}
             />
           ))}

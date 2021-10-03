@@ -15,6 +15,7 @@ class WeatherStore {
   errorMessage = '';
   selectedDayTemp = [];
   graphDataset = [];
+  city = {};
 
   constructor() {
     makeAutoObservable(this);
@@ -53,8 +54,8 @@ class WeatherStore {
     axios
       .get(apiURL2)
       .then((res) => {
+        this.city = res.data.city;
         this.reStructureResponse(res.data);
-
         this.loading = false;
       })
       .catch(() => {

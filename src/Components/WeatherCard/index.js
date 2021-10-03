@@ -19,15 +19,15 @@ const useStyles = makeStyles({
     height: '100%',
     padding: '0 10px',
   },
-  temp: {
-    textAlign: 'left',
-    color: 'white',
-  },
   img: {
     margin: 0,
     position: 'absolute',
     top: '50%',
     transform: 'translateY(-50%)',
+  },
+  text: {
+    textAlign: 'left',
+    color: 'white',
   },
 });
 const Item = styled(Box)(({ theme }) => ({
@@ -39,9 +39,9 @@ const Item = styled(Box)(({ theme }) => ({
 }));
 
 export default function WeatherCard(props) {
-  const { avgTemp, date, cloud, weather, showGraph, value, unit } = props;
+  const { avgTemp, date, cloud, weather, showGraph, value, unit, city } = props;
   const classes = useStyles();
-
+  console.log(classes.city);
   return (
     <Card
       sx={{ margin: 1 }}
@@ -60,7 +60,7 @@ export default function WeatherCard(props) {
             <Typography
               variant="h4"
               component="h4"
-              className={classes.temp}
+              className={classes.text}
               // sx={{ fontSize: 14 }}
               color="text.secondary"
               gutterBottom
@@ -72,12 +72,12 @@ export default function WeatherCard(props) {
             <Typography
               variant="p"
               component="h5"
-              className={classes.temp}
+              className={classes.text}
               // sx={{ fontSize: 14 }}
               color="text.secondary"
               gutterBottom
             >
-              <p>{date}</p>
+              <p>{city.name + ' | ' + date}</p>
             </Typography>
           </Item>
 
