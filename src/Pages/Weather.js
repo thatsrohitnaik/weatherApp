@@ -21,6 +21,8 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import { makeStyles } from '@mui/styles';
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   '& .MuiToggleButtonGroup-grouped': {
@@ -38,6 +40,17 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   },
 }));
 
+
+const useStyles = makeStyles({
+  icon: {
+    position: 'relative',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    margin: 0,
+  }
+});
+
+
 function Weather() {
   const { weatherStore: store } = React.useContext(GlobalContext);
   const [unit, setUnit] = React.useState(store.unit || Units.Fahrenheit);
@@ -46,6 +59,7 @@ function Weather() {
     setUnit(event.target.value);
     store.setUnit(event.target.value)
   };
+  const classes = useStyles();
 
   useEffect(() => {
     store.fetchWeatherReport();
@@ -83,12 +97,12 @@ function Weather() {
                   }
                 </ToggleButtonGroup>
               </StyledToggleButtonGroup>
+              <RefreshIcon className={classes.icon} onClick={() => {
+                  store.fetchWeatherReport();
+                }}/>
             </Grid>
             <Grid item xs={2}>
-              <Button variant="text"
-                onClick={() => {
-                  store.fetchWeatherReport();
-                }}>Refresh</Button>
+               
             </Grid>
           </Grid>
         </Box>
