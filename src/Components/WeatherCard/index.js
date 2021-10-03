@@ -23,6 +23,12 @@ const useStyles = makeStyles({
     textAlign: 'left',
     color: 'white',
   },
+  img: {
+    margin: 'auto',
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+  },
 });
 const Item = styled(Box)(({ theme }) => ({
   ...theme.typography.body2,
@@ -70,7 +76,7 @@ export default function WeatherCard(props) {
           </Item>
 
           <Item>
-            <img src={getIcon(weather.icon)} />
+            <img src={getIcon(weather.icon)} className={classes.img} />
           </Item>
         </Stack>
       </CardContent>
