@@ -119,7 +119,7 @@ function Weather() {
               value={value}
               city={store.city}
               index={index}
-              currentIndex={store.currentIndex}
+              currentSildeIndex={store.currentSildeIndex}
               showGraph={showGraph}
             />
           ))}

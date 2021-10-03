@@ -16,7 +16,7 @@ class WeatherStore {
   selectedDayTemp = [];
   graphDataset = [];
   city = {};
-  currentIndex = 0;
+  currentSildeIndex = 0;
 
   constructor() {
     makeAutoObservable(this);
@@ -30,7 +30,7 @@ class WeatherStore {
 
   setSelectedDayTemp(value, index) {
     this.selectedDayTemp = value;
-    this.currentIndex = index;
+    this.currentSildeIndex = index;
     const label = [];
     const max = [];
     const min = [];

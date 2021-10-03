@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
 import { makeStyles } from '@mui/styles';
-import { getIcon } from '../../Util/icon';
+import { getIcon } from '../../../Util/icon';
 
 const useStyles = makeStyles({
   cardSelect: {
@@ -58,13 +58,15 @@ export default function WeatherCard(props) {
     unit,
     city,
     index,
-    currentIndex,
+    currentSildeIndex,
   } = props;
   const classes = useStyles();
   return (
     <Card
       sx={{ margin: 1 }}
-      className={currentIndex === index ? classes.cardSelect : classes.card}
+      className={
+        currentSildeIndex === index ? classes.cardSelect : classes.card
+      }
       onClick={() => {
         showGraph(value, index);
       }}
