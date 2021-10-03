@@ -14,7 +14,6 @@ class WeatherStore {
   isError = false;
   errorMessage = '';
   selectedDayTemp = [];
-  labels = [];
   graphDataset = [];
 
   constructor() {
@@ -37,7 +36,7 @@ class WeatherStore {
     });
     this.graphDataset = {
       labels: label,
-      dataset: [
+      datasets: [
         { label: 'max', data: max, backgroundColor: 'green' },
         { label: 'min', data: min, backgroundColor: 'orange' },
       ],

@@ -13,10 +13,9 @@ const options = {
   },
 };
 
-const LineChart = (props) => (
-  <>
-    <Line data={data} options={options} />
-  </>
-);
+const WeatherGraph = ({ data }) => {
+  console.log(data, 'hmm');
+  return <Line data={data} options={options} />;
+};
 
-export default LineChart;
+export default WeatherGraph;

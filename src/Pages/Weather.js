@@ -23,6 +23,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { makeStyles } from '@mui/styles';
+import WeatherGraph from '../Components/WeatherGraph/';
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   '& .MuiToggleButtonGroup-grouped': {
@@ -71,7 +72,7 @@ function Weather() {
     return <Error message={store.errorMessage} />;
   }
 
-  console.log(store.selectedDayTemp);
+  console.log(store.graphDataset);
 
   const showGraph = (value) => {
     store.setSelectedDayTemp(value);
@@ -126,6 +127,7 @@ function Weather() {
             />
           ))}
       </Slider>
+      <WeatherGraph data={store.graphDataset} />
     </div>
   );
 }
