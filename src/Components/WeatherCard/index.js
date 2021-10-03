@@ -1,18 +1,32 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
-import Div from '@mui/material/Div';
+import { makeStyles } from '@mui/styles';
+import { getIcon } from '../../Util/icon';
 
-const Item = styled(Div)(({ theme }) => ({
+const useStyles = makeStyles({
+  card: {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    border: 0,
+    borderRadius: 10,
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    color: 'white',
+    height: '100%',
+    padding: '0 10px',
+  },
+  temp: {
+    textAlign: 'left',
+    color: 'white',
+  },
+});
+const Item = styled(Box)(({ theme }) => ({
   ...theme.typography.body2,
+  width: '50%',
   padding: theme.spacing(1),
   textAlign: 'center',
   color: theme.palette.text.secondary,
@@ -20,11 +34,12 @@ const Item = styled(Div)(({ theme }) => ({
 
 export default function WeatherCard(props) {
   const { avgTemp, date, cloud, weather } = props;
+  const classes = useStyles();
 
-  console.log(weather);
+  console.log(getIcon(weather.icon));
 
   return (
-    <Card sx={{ margin: 1 }}>
+    <Card sx={{ margin: 1 }} className={classes.card}>
       <CardContent>
         <Stack
           direction="row"
@@ -35,32 +50,35 @@ export default function WeatherCard(props) {
             <Typography
               variant="h4"
               component="h4"
+              className={classes.temp}
               // sx={{ fontSize: 14 }}
               color="text.secondary"
               gutterBottom
             >
               <p>{avgTemp}</p>
+            </Typography>
+            <Typography
+              variant="p"
+              component="h5"
+              className={classes.temp}
+              // sx={{ fontSize: 14 }}
+              color="text.secondary"
+              gutterBottom
+            >
+              <p>{date}</p>
             </Typography>
           </Item>
 
           <Item>
-            <Typography
-              variant="h4"
-              component="h4"
-              // sx={{ fontSize: 14 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              <p>{avgTemp}</p>
-            </Typography>
+            <img src={getIcon(weather.icon)} />
           </Item>
         </Stack>
       </CardContent>
-      <CardContent>
+      {/* <CardContent>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {date}
         </Typography>
-      </CardContent>
+      </CardContent> */}
     </Card>
   );
 }
