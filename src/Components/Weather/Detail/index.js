@@ -12,10 +12,7 @@ const useStyles = makeStyles({
 
 const details = (props) => {
   const classes = useStyles();
-
   const data = toJS(props.data);
-
-  console.log(data);
 
   if (!data?.main) {
     return null;
