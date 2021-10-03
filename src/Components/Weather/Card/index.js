@@ -63,6 +63,7 @@ export default function WeatherCard(props) {
   const classes = useStyles();
   return (
     <Card
+      key={Math.random()}
       sx={{ margin: 1 }}
       className={
         currentSildeIndex === index ? classes.cardSelect : classes.card
@@ -77,7 +78,7 @@ export default function WeatherCard(props) {
           divider={<Divider orientation="vertical" flexItem />}
           spacing={2}
         >
-          <Item>
+          <Item key={0}>
             <Typography
               key={1}
               variant="h4"
@@ -107,13 +108,12 @@ export default function WeatherCard(props) {
               className={classes.text}
               // sx={{ fontSize: 14 }}
               color="text.secondary"
-              gutterTop
             >
               {date}
             </Typography>
           </Item>
 
-          <Item>
+          <Item key={1}>
             <SlideClouds value={value} />
           </Item>
         </Stack>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
+import { toJS } from 'mobx';
 
 const useStyles = makeStyles({
   text: {
@@ -11,11 +12,13 @@ const useStyles = makeStyles({
 
 const details = (props) => {
   const classes = useStyles();
-  console.log(props);
-  if (!props) {
+  if (!props.data) {
     return null;
   }
-  const { main } = props;
+  const { data } = toJS(props);
+  const { main } = data;
+
+  console.log(main.feels_like);
 
   return (
     <>
@@ -27,7 +30,9 @@ const details = (props) => {
         // sx={{ fontSize: 14 }}
         color="text.secondary"
         gutterBottom
-      ></Typography>
+      >
+        {'feelslike' + main.feels_like}
+      </Typography>
     </>
   );
 };

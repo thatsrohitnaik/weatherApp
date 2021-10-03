@@ -46,7 +46,7 @@ const useStyles = makeStyles({
 
 function Weather() {
   const { weatherStore: store } = React.useContext(GlobalContext);
-  const { hourIndex, setHourIndex } = React.useState(0);
+  const [hourIndex, setHourIndex] = React.useState(0);
   const [unit, setUnit] = React.useState(store.unit || Units.Fahrenheit);
 
   const handleChange = (event) => {
@@ -61,7 +61,7 @@ function Weather() {
 
   const handleIndexClick = (index) => {
     console.log('currentHourIndex', index, toJS(store.selectedDayTemp[index]));
-    this.setHourIndex(index);
+    setHourIndex(index);
   };
 
   if (store.loading) {
@@ -81,7 +81,7 @@ function Weather() {
       <div>
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
-            <Grid item xs={10}>
+            <Grid key={1} item xs={10}>
               <StyledToggleButtonGroup
                 size="small"
                 value={unit}
@@ -107,7 +107,7 @@ function Weather() {
                 }}
               />
             </Grid>
-            <Grid item xs={2}></Grid>
+            <Grid key={2} item xs={2}></Grid>
           </Grid>
         </Box>
       </div>
