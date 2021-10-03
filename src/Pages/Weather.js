@@ -22,17 +22,9 @@ import Button from '@mui/material/Button';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   '& .MuiToggleButtonGroup-grouped': {
-    margin: theme.spacing(0.5),
+    margin: theme.spacing(0.1),
     border: 0,
     '&.Mui-disabled': {
       border: 0,
@@ -87,7 +79,7 @@ function Weather() {
                   onChange={handleChange}
                 >
                   {
-                    Object.entries(Units).map(([key, value]) => <ToggleButton value={value} >{getUnits(key)}</ToggleButton>)
+                    Object.entries(Units).map(([value]) => <ToggleButton value={value} >{getUnits(value)}</ToggleButton>)
                   }
                 </ToggleButtonGroup>
               </StyledToggleButtonGroup>

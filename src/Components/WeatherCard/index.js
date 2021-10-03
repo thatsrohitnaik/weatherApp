@@ -12,8 +12,14 @@ export default function WeatherCard(props) {
   return (
     <Card sx={{ margin: 1 }}>
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {avgTemp}
+        <Typography
+          variant="h4"
+          component="h4"
+          // sx={{ fontSize: 14 }}
+          color="text.secondary"
+          gutterBottom
+        >
+          <p>{avgTemp}</p>
         </Typography>
       </CardContent>
       <CardContent>
