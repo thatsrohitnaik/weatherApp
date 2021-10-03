@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import StoreContext from '../Context/';
+import GlobalContext from '../Context/';
 import { observer } from 'mobx-react-lite';
 import Loading from '../Components/Loading';
 import Error from '../Components/Error';
@@ -16,7 +16,7 @@ import {slideSettings} from '../settings'
 import {TemperatureUnits as Units} from '../Util/temperature'
 
 function Weather() {
-  const { weatherStore: store } = React.useContext(StoreContext);
+  const { weatherStore: store } = React.useContext(GlobalContext);
   const [unit, setUnit] = React.useState(store.unit || Units.Fahrenheit);
 
   const handleChange = (event) => {
