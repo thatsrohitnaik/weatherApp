@@ -75,7 +75,7 @@ function Weather() {
   console.log(store.graphDataset);
 
   const showGraph = (value) => {
-    store.setSelectedDayTemp(value);
+    store.setSelectedDayTemp(value.data);
   };
 
   return (

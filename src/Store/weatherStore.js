@@ -22,14 +22,17 @@ class WeatherStore {
 
   setUnit(unit) {
     this.unit = unit;
+    this.selectedDayTemp.length &&
+      this.setSelectedDayTemp(this.selectedDayTemp);
   }
 
   setSelectedDayTemp(value) {
-    this.selectedDayTemp = value.data;
+    this.selectedDayTemp = value;
+    console.log(value, 'value');
     const label = [];
     const max = [];
     const min = [];
-    value.data.map((e) => {
+    value.map((e) => {
       label.push(e.hour);
       max.push(kelvinConverter(e.main.temp_max, this.unit));
       min.push(kelvinConverter(e.main.temp_min, this.unit));
@@ -51,6 +54,7 @@ class WeatherStore {
       .get(apiURL2)
       .then((res) => {
         this.reStructureResponse(res.data);
+
         this.loading = false;
       })
       .catch(() => {
@@ -69,9 +73,8 @@ class WeatherStore {
       //const key = epocToDate(dt);
 
       const [key, hour] = dt_txt.split(' ');
-      const [h] = hour.split(':');
 
-      report.hour = h;
+      report.hour = hour.substr(0, hour.lastIndexOf(':'));
 
       let currentAvgTemp = (temp_max + temp_min) / 2;
 
@@ -92,6 +95,9 @@ class WeatherStore {
       date,
       value,
     }));
+
+  //  console.log(this.report[0].value.data);
+     this.setSelectedDayTemp(this.report[0].value.data)
   }
 }
 
