@@ -41,7 +41,6 @@ const Item = styled(Box)(({ theme }) => ({
 export default function WeatherCard(props) {
   const { avgTemp, date, cloud, weather, showGraph, value, unit, city } = props;
   const classes = useStyles();
-  console.log(classes.city);
   return (
     <Card
       sx={{ margin: 1 }}
