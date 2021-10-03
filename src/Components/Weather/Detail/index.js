@@ -12,26 +12,27 @@ const useStyles = makeStyles({
 
 const details = (props) => {
   const classes = useStyles();
-  if (!props.data) {
-    return null;
-  }
-  const { data } = toJS(props);
-  const { main } = data;
+
+  const data = toJS(props.data);
+
+  console.log(data);
+
+  // if (!toJS(data)?.main) {
+  //   return null;
+  // }
 
   return (
-    <>
-      <Typography
-        key={3}
-        variant="p"
-        component="h5"
-        className={classes.text}
-        // sx={{ fontSize: 14 }}
-        color="text.secondary"
-        gutterBottom
-      >
-        {'feelslike' + main.feels_like}
-      </Typography>
-    </>
+    <Typography
+      key={3}
+      variant="p"
+      component="h5"
+      className={classes.text}
+      // sx={{ fontSize: 14 }}
+      color="text.secondary"
+      gutterBottom
+    >
+      {'feelslike'}
+    </Typography>
   );
 };
 
