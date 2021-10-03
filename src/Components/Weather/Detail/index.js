@@ -6,7 +6,7 @@ import { toJS } from 'mobx';
 const useStyles = makeStyles({
   text: {
     textAlign: 'left',
-    color: 'white',
+    color: 'black',
   },
 });
 
@@ -17,22 +17,24 @@ const details = (props) => {
 
   console.log(data);
 
-  // if (!toJS(data)?.main) {
-  //   return null;
-  // }
+  if (!data?.main) {
+    return null;
+  }
 
   return (
-    <Typography
-      key={3}
-      variant="p"
-      component="h5"
-      className={classes.text}
-      // sx={{ fontSize: 14 }}
-      color="text.secondary"
-      gutterBottom
-    >
-      {'feelslike'}
-    </Typography>
+    <div>
+      <Typography
+        key={3}
+        variant="p"
+        component="h5"
+        className={classes.text}
+        // sx={{ fontSize: 14 }}
+        color="text.secondary"
+        gutterBottom
+      >
+        {'Feels Like' + data.main.feels_like}
+      </Typography>
+    </div>
   );
 };
 
