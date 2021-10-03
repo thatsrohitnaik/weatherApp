@@ -15,7 +15,7 @@ class WeatherStore {
   errorMessage = '';
   selectedDayTemp = [];
   labels = [];
-  dataset = [];
+  graphDataset = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -35,7 +35,13 @@ class WeatherStore {
       max.push(kelvinConverter(e.main.temp_max, this.unit));
       min.push(kelvinConverter(e.main.temp_min, this.unit));
     });
-    console.log(max, min, label);
+    this.graphDataset = {
+      labels: label,
+      dataset: [
+        { label: 'max', data: max, backgroundColor: 'green' },
+        { label: 'min', data: min, backgroundColor: 'orange' },
+      ],
+    };
   }
 
   fetchWeatherReport() {
