@@ -41,7 +41,7 @@ const useStyles = makeStyles({
     position: 'relative',
     top: '50%',
     transform: 'translateY(-50%)',
-    margin: 0,
+    marginTop: -10,
   },
 });
 
