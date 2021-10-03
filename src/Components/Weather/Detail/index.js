@@ -18,8 +18,6 @@ const details = (props) => {
   const { data } = toJS(props);
   const { main } = data;
 
-  console.log(main.feels_like);
-
   return (
     <>
       <Typography

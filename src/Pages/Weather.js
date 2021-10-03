@@ -60,7 +60,6 @@ function Weather() {
   }, []);
 
   const handleIndexClick = (index) => {
-    console.log('currentHourIndex', index, toJS(store.selectedDayTemp[index]));
     setHourIndex(index);
   };
 
@@ -96,7 +95,9 @@ function Weather() {
                   onChange={handleChange}
                 >
                   {Object.entries(Units).map(([key, value]) => (
-                    <ToggleButton value={value}>{getUnits(value)}</ToggleButton>
+                    <ToggleButton value={value} key={key}>
+                      {getUnits(value)}
+                    </ToggleButton>
                   ))}
                 </ToggleButtonGroup>
               </StyledToggleButtonGroup>
