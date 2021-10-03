@@ -79,7 +79,7 @@ function Weather() {
                   onChange={handleChange}
                 >
                   {
-                    Object.entries(Units).map(([value]) => <ToggleButton value={value} >{getUnits(value)}</ToggleButton>)
+                    Object.entries(Units).map(([key,value]) => <ToggleButton value={value} >{getUnits(value)}</ToggleButton>)
                   }
                 </ToggleButtonGroup>
               </StyledToggleButtonGroup>
@@ -96,7 +96,7 @@ function Weather() {
       </div>
       <Slider {...slideSettings}>
         {store.report.length > 0 &&
-          toJS(store.report).map(({ date, value }, index) => <WeatherCard key={index} avgTemp={kelvinConverter(value.avgTemp, store.unit)} date={date} cloud={} />
+          toJS(store.report).map(({ date, value }, index) => <WeatherCard key={index} avgTemp={kelvinConverter(value.avgTemp, store.unit)} date={date} cloud={} weather={value.data[0].weather[0]} />
           )}
       </Slider>
     </div>
