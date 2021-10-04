@@ -5,12 +5,6 @@ import { toJS } from 'mobx';
 const WeatherGraph = ({ data, handleIndexClick, rawData: array, unit }) => {
   const rawData = toJS(array);
 
-  // const footer = (tooltipItem) => {
-  //   let sum = 0;
-  //   console.log(rawData[tooltipItem[0].dataIndex]);
-  //   return '<p>ok</p>';
-  // };
-
   const getOrCreateTooltip = (chart) => {
     let tooltipEl = chart.canvas.parentNode.querySelector('div');
 
@@ -141,6 +135,9 @@ const WeatherGraph = ({ data, handleIndexClick, rawData: array, unit }) => {
       title: {
         display: true,
         text: 'Hourly weather breakdown',
+      },
+      legend: {
+        position: 'bottom',
       },
       tooltip: {
         enabled: false,
