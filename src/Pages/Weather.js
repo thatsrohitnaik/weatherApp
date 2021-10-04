@@ -137,6 +137,7 @@ function Weather() {
           <WeatherGraph
             data={store.graphDataset}
             handleIndexClick={handleIndexClick}
+            rawData={store.selectedDayTemp}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={4}>
