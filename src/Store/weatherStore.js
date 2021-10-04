@@ -1,7 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import axios from 'axios';
 import { apiURL2 } from '../settings';
-import { epocToDate } from '../Util/date';
 import {
   TemperatureUnits as Units,
   kelvinConverter,
@@ -56,7 +55,7 @@ class WeatherStore {
       .get(apiURL2)
       .then((res) => {
         this.city = res.data.city;
-        this.reStructureResponse(res.data);
+        this.modify(res.data);
         this.loading = false;
       })
       .catch(() => {
@@ -66,7 +65,7 @@ class WeatherStore {
       });
   }
 
-  reStructureResponse(response) {
+  modify(response) {
     let map = new Map();
 
     response.list.map((report) => {
