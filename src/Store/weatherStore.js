@@ -24,10 +24,10 @@ class WeatherStore {
 
   setUnit(unit) {
     this.unit = unit;
-    this.selectedDay.length && this.setselectedDay(this.selectedDay);
+    this.selectedDay.length && this.setSelectedDay(this.selectedDay);
   }
 
-  setselectedDay(value, index) {
+  setSelectedDay(value, index) {
     this.selectedDay = value;
     this.currentSildeIndex = index;
     const label = [];
@@ -97,7 +97,7 @@ class WeatherStore {
       value,
     }));
 
-    this.setselectedDay(this.report[0].value.data, 0);
+    this.setSelectedDay(this.report[0].value.data, 0);
   }
 }
 

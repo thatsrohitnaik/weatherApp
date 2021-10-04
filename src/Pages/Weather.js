@@ -72,7 +72,7 @@ function Weather() {
   }
 
   const showGraph = (value, index) => {
-    store.setselectedDay(value.data, index);
+    store.setSelectedDay(value.data, index);
   };
 
   return (
