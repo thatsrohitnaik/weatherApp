@@ -24,7 +24,8 @@ class WeatherStore {
 
   setUnit(unit) {
     this.unit = unit;
-    this.selectedDay.length && this.setSelectedDay(this.selectedDay);
+    this.selectedDay.length &&
+      this.setSelectedDay(this.selectedDay, this.currentSildeIndex);
   }
 
   setSelectedDay(value, index) {
