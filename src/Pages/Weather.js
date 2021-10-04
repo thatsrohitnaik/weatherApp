@@ -17,7 +17,6 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { makeStyles } from '@mui/styles';
 import WeatherGraph from '../Components/Weather/Graph/';
-import Detail from '../Components/Weather/Detail';
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   '& .MuiToggleButtonGroup-grouped': {
@@ -46,7 +45,6 @@ const useStyles = makeStyles({
 
 function Weather() {
   const { weatherStore: store } = React.useContext(GlobalContext);
-  const [hourIndex, setHourIndex] = React.useState(0);
   const [unit, setUnit] = React.useState(store.unit || Units.Fahrenheit);
 
   const handleChange = (event) => {

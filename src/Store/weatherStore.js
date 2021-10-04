@@ -71,11 +71,7 @@ class WeatherStore {
     response.list.map((report) => {
       const { dt, main, dt_txt } = report;
       const { temp_max, temp_min } = main;
-      //const key = epocToDate(dt);
-
       const [key, hour] = dt_txt.split(' ');
-
-      report.hour = hour.substr(0, hour.lastIndexOf(':'));
 
       let currentAvgTemp = (temp_max + temp_min) / 2;
 
@@ -86,6 +82,8 @@ class WeatherStore {
         list = value.data;
         currentAvgTemp = (currentAvgTemp + value.avgTemp) / 2;
       }
+
+      report.hour = hour.substr(0, hour.lastIndexOf(':'));
 
       list.push(report);
 
