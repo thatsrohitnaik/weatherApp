@@ -8,7 +8,7 @@ import {
 } from '../Util/temperature';
 
 class WeatherStore {
-  unit = Units.Fahrenheit;
+  unit = Units.Celsius;
   report = [];
   loading = false;
   isError = false;
