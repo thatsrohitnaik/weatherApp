@@ -13,11 +13,10 @@ class WeatherStore {
   loading = false;
   isError = false;
   errorMessage = '';
-  selectedDayTemp = [];
+  selectedDay = [];
   graphDataset = [];
   city = {};
   currentSildeIndex = 0;
-  currentHourIndex = 0;
 
   constructor() {
     makeAutoObservable(this);
@@ -25,12 +24,11 @@ class WeatherStore {
 
   setUnit(unit) {
     this.unit = unit;
-    this.selectedDayTemp.length &&
-      this.setSelectedDayTemp(this.selectedDayTemp);
+    this.selectedDay.length && this.setselectedDay(this.selectedDay);
   }
 
-  setSelectedDayTemp(value, index) {
-    this.selectedDayTemp = value;
+  setselectedDay(value, index) {
+    this.selectedDay = value;
     this.currentSildeIndex = index;
     const label = [];
     const max = [];
@@ -99,7 +97,7 @@ class WeatherStore {
       value,
     }));
 
-    this.setSelectedDayTemp(this.report[0].value.data, 0);
+    this.setselectedDay(this.report[0].value.data, 0);
   }
 }
 

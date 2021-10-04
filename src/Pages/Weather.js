@@ -72,7 +72,7 @@ function Weather() {
   }
 
   const showGraph = (value, index) => {
-    store.setSelectedDayTemp(value.data, index);
+    store.setselectedDay(value.data, index);
   };
 
   return (
@@ -139,7 +139,7 @@ function Weather() {
           <WeatherGraph
             data={store.graphDataset}
             handleIndexClick={handleIndexClick}
-            rawData={store.selectedDayTemp}
+            rawData={store.selectedDay}
             unit={store.unit}
           />
         </Grid>
