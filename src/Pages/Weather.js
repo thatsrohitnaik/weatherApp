@@ -57,10 +57,6 @@ function Weather() {
     store.fetchWeatherReport();
   }, []);
 
-  const handleIndexClick = (index) => {
-    setHourIndex(index);
-  };
-
   if (store.loading) {
     return <Loading />;
   }
@@ -136,7 +132,6 @@ function Weather() {
         <Grid item xs={12} sm={12} md={8}>
           <WeatherGraph
             data={store.graphDataset}
-            handleIndexClick={handleIndexClick}
             rawData={store.selectedDay}
             unit={store.unit}
           />

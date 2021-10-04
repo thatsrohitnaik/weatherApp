@@ -2,6 +2,7 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { toJS } from 'mobx';
 import { externalTooltipHandler } from './tooltip';
+import { epocToDate } from '../../../Util/date';
 
 const WeatherGraph = ({ data, handleIndexClick, rawData: array, unit }) => {
   const rawData = toJS(array);
@@ -9,6 +10,8 @@ const WeatherGraph = ({ data, handleIndexClick, rawData: array, unit }) => {
   const externalTooltipHandlerWrapper = (context) => {
     externalTooltipHandler(context, unit, rawData);
   };
+
+  const date = epocToDate(rawData[0]?.dt) || null;
 
   const options = {
     scales: {
@@ -20,15 +23,10 @@ const WeatherGraph = ({ data, handleIndexClick, rawData: array, unit }) => {
         },
       ],
     },
-    onClick: (e, element) => {
-      if (element.length > 0) {
-        handleIndexClick(element[0].index);
-      }
-    },
     plugins: {
       title: {
         display: true,
-        text: 'Hourly weather breakdown',
+        text: 'Hourly weather breakdown for ' + date,
       },
       legend: {
         position: 'bottom',
