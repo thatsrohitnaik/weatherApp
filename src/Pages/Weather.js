@@ -71,41 +71,38 @@ function Weather() {
 
   return (
     <div>
-      <div>
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={2}>
-            <Grid key={1} item xs={10}>
-              <StyledToggleButtonGroup
-                size="small"
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container>
+          <Grid key={1} item xs={12}>
+            <StyledToggleButtonGroup
+              size="small"
+              value={unit}
+              exclusive
+              onChange={handleChange}
+              aria-label="Temperature"
+            >
+              <ToggleButtonGroup
+                color="primary"
                 value={unit}
                 exclusive
                 onChange={handleChange}
-                aria-label="Temperature"
               >
-                <ToggleButtonGroup
-                  color="primary"
-                  value={unit}
-                  exclusive
-                  onChange={handleChange}
-                >
-                  {Object.entries(Units).map(([key, value]) => (
-                    <ToggleButton value={value} key={key}>
-                      {getUnits(value)}
-                    </ToggleButton>
-                  ))}
-                </ToggleButtonGroup>
-              </StyledToggleButtonGroup>
-              <RefreshIcon
-                className={classes.icon}
-                onClick={() => {
-                  store.fetchWeatherReport();
-                }}
-              />
-            </Grid>
-            <Grid key={2} item xs={2}></Grid>
+                {Object.entries(Units).map(([key, value]) => (
+                  <ToggleButton value={value} key={key}>
+                    {getUnits(value)}
+                  </ToggleButton>
+                ))}
+              </ToggleButtonGroup>
+            </StyledToggleButtonGroup>
+            <RefreshIcon
+              className={classes.icon}
+              onClick={() => {
+                store.fetchWeatherReport();
+              }}
+            />
           </Grid>
-        </Box>
-      </div>
+        </Grid>
+      </Box>
       <Slider {...slideSettings}>
         {store.report.length > 0 &&
           toJS(store.report).map(({ date, value }, index) => (
