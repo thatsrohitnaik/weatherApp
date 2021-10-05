@@ -16,7 +16,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { makeStyles } from '@mui/styles';
-import WeatherGraph from '../Components/Weather/Graph/';
+import WeatherGraph from '../Components/Graph/';
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   '& .MuiToggleButtonGroup-grouped': {
