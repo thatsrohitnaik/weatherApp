@@ -51,8 +51,6 @@ export default function WeatherCard(props) {
   const {
     avgTemp,
     date,
-    cloud,
-    weather,
     showGraph,
     value,
     unit,
