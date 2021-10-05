@@ -80,9 +80,10 @@ function Weather() {
       seaLevel.push('sea level: ' + list.main.sea_level);
     });
     setTooltipData({ humidity, pressure, seaLevel });
+    return { humidity, pressure, seaLevel };
   };
 
-  graphTooltipData();
+  // graphTooltipData();
 
   return (
     <div>
@@ -146,7 +147,7 @@ function Weather() {
             data={store.graphDataset}
             rawData={store.selectedDay}
             unit={store.unit}
-            tooltipData={tooltipData}
+            //  tooltipData={graphTooltipData()}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={2}></Grid>
