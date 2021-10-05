@@ -1,7 +1,7 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { toJS } from 'mobx';
-import { externalTooltipHandler } from './tooltip';
+import { externalTooltipHandler } from './weatherTooltip';
 import { epocToDate } from '../../Util/date';
 
 const WeatherGraph = ({ data, handleIndexClick, rawData: array, unit }) => {

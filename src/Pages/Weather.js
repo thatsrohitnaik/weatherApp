@@ -69,6 +69,13 @@ function Weather() {
     store.setSelectedDay(value.data, index);
   };
 
+  const graphTooltipData = () => {
+    const humidity = [];
+    store.selectedDay.map((list) => {
+      console.log(list.main);
+    });
+  };
+
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
