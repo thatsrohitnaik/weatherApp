@@ -46,6 +46,7 @@ const useStyles = makeStyles({
 function Weather() {
   const { weatherStore: store } = React.useContext(GlobalContext);
   const [unit, setUnit] = React.useState(store.unit || Units.Fahrenheit);
+  const [tooltipData, setTooltipData] = React.useState();
 
   const handleChange = (event) => {
     setUnit(event.target.value);
@@ -71,10 +72,17 @@ function Weather() {
 
   const graphTooltipData = () => {
     const humidity = [];
-    store.selectedDay.map((list) => {
-      console.log(list.main);
+    const pressure = [];
+    const seaLevel = [];
+    toJS(store.selectedDay).map((list) => {
+      humidity.push('humidity: ' + list.main.humidity);
+      pressure.push('pressure: ' + list.main.pressure);
+      seaLevel.push('sea level: ' + list.main.sea_level);
     });
+    setTooltipData({ humidity, pressure, seaLevel });
   };
+
+  graphTooltipData();
 
   return (
     <div>
@@ -138,6 +146,7 @@ function Weather() {
             data={store.graphDataset}
             rawData={store.selectedDay}
             unit={store.unit}
+            tooltipData={tooltipData}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={2}></Grid>
